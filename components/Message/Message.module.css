@@ -1,0 +1,18 @@
+.window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    min-width: 200px;
+    min-height: 60px;
+    padding: 10px 30px;
+    background-color: blueviolet;
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    border-radius: 20px;
+}
+.window h1 {
+    color: #fff;
+}
