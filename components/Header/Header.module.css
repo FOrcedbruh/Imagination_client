@@ -30,3 +30,11 @@
 #loginLink {
     color: blueviolet;
 }
+
+.logo {
+    cursor: pointer;
+    transition: all .4s ease;
+}
+.logo:hover {
+   transform: scale(1.4);
+}

@@ -11,7 +11,7 @@ import Message from '@/components/Message/Message';
 
 
 
-const RegPage: React.FC = () => {
+const LoginPage: React.FC = () => {
 
 
 
@@ -36,7 +36,7 @@ const RegPage: React.FC = () => {
         handleSubmit
     } = useForm<FormState>({mode: 'onBlur'});
 
-    const src: string = 'http://localhost:8080/auth/registration'
+    const src: string = 'http://localhost:8080/auth/login'
 
 
     const closeMessage = () => {
@@ -46,16 +46,15 @@ const RegPage: React.FC = () => {
     const onSubmit = (data: any) => {
         const username: string = data.username;
         const password: string = data.password;
-        const email: string = data.email;
 
 
         axios.post(src, {
             username,
-            email,
             password
         }).then(res => {
-            console.log(res.data.message);
             setResponse(res.data.message);
+            const token = res.data.token;
+            localStorage.setItem('token', token);
         })
 
         closeMessage();
@@ -67,7 +66,7 @@ const RegPage: React.FC = () => {
     return (
         <section className={styles.window}>
             {response && <Message response={response}/>}
-            <h1>Registration</h1>
+            <h1>Login</h1>
             <form className={styles.window} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.area}>
                     <label htmlFor="username">Name</label>
@@ -79,17 +78,6 @@ const RegPage: React.FC = () => {
                         }
                     })}/>
                     {errors.username && <article className={styles.error}>{errors.username.message}</article>}
-                </div>
-                <div className={styles.area}>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" placeholder='example@gmail.com...' {...register('email', {
-                        required: 'Enter your Email',
-                        pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: 'Email syntax error'
-                        }
-                    })}/>
-                    {errors.email && <article className={styles.error}>{errors.email.message}</article>}
                 </div>
                 <div className={styles.area}>
                     <label htmlFor="password">Password</label>
@@ -105,11 +93,12 @@ const RegPage: React.FC = () => {
                     </section>
                     {errors.password && <article className={styles.error}>{errors.password.message}</article>}
                 </div>
-                <input style={{'cursor': !isValid ? 'not-allowed' : 'pointer'}} type="submit" value={'Sign up'} className={styles.regBtn} disabled={!isValid}/>
+                <input style={{'cursor': !isValid ? 'not-allowed' : 'pointer'}} type="submit" value={'Sign in'} className={styles.regBtn} disabled={!isValid}/>
             </form>
-            <p className={styles.logLink}>Alredy have an account?<Link href={'/login'}>Login</Link></p>
+            <p className={styles.logLink}>Dont have an account?<Link href={'/registration'}>Registration</Link></p>
         </section>
     )
 }
 
-export default RegPage;
+
+export default LoginPage;

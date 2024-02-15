@@ -24,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <main className="wrapper">
-          {children}
-        </main>
+          <Header />
+          <main className="wrapper">
+            {children}
+          </main>
       </body>
     </html>
   );
