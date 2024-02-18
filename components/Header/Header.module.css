@@ -38,3 +38,20 @@
 .logo:hover {
    transform: scale(1.4);
 }
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.profile a {
+    text-decoration: none;
+    color: blueviolet;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.03rem;
+    transition: transform .3s ease;
+}
+.profile a:hover {
+    transform: scale(1.2);
+}
