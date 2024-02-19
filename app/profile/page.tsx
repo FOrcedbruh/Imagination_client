@@ -2,15 +2,32 @@
 import { StoreContext } from '@/Store/Store';
 import styles from './page.module.css';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import Image from 'next/image';
+import profile from './../../images/icons/profile.png';
+import plus from './../../images/icons/plus.svg';
+import Avatar from 'react-avatar-edit';
+
+
+interface IUser {
+    username: string,
+    email: string,
+    avatar: string
+}
+
+
+
+
 
 
 const Profile: React.FC = () => {
 
+    const { token } = useContext(StoreContext);
+
 
     const src: string = 'http://localhost:8080/getUser';
 
-    const [userData, setUserData] = useState();
+    const [userData, setUserData] = useState<IUser[]>([]);
 
     useEffect(() => {
         const username: string | null = localStorage.getItem('username');
@@ -22,11 +39,49 @@ const Profile: React.FC = () => {
         })
     }, [])
 
+    const [avatarSrc, setAvatarSrc] = useState<any>(null);
+    const [preview, setPreview] = useState<null | any>(profile);
+    const [editAvatar, setEditAvatar] = useState<boolean>(false);
+
+    const onCloseAvatarEdit = () => {
+        setPreview(null)
+    }
+
+    const onCropAvatar = (view: any) => {
+        setPreview(view);
+    }
+    
+    const createAvatarSrc: string = 'http://localhost:8080/auth/createAvatar';
+
+    const AvatarDoneHandler = () => {
+        const username = userData[0].username;
+        axios.post(createAvatarSrc, {
+            username,
+            preview
+        }).then(res => console.log(res.data));
+        setEditAvatar(false);
+    }
 
     return (
-        <section className={styles.window}>
+        <>  
+            {token ? <section className={styles.window}>
+                {editAvatar && <div className={styles.avatarEdit}><Avatar  onCrop={onCropAvatar} onClose={onCloseAvatarEdit} src={avatarSrc} width={300} height={300}/><p onClick={AvatarDoneHandler}>done</p></div>}
+                <div className={styles.userInfo}>
+                    <article>
+                        <Image priority src={userData[0]?.avatar ? userData[0]?.avatar : preview} alt='' width={100} height={100}/>
+                        <p onClick={() => setEditAvatar(true)}>add avatar &nbsp; <Image src={plus} alt='' width={15} height={15}/></p>
+                    </article>
+                    <article>
+                        <h1>{userData[0]?.username}</h1>
+                    </article>
+                    <div className={styles.email}>
+                        {userData[0]?.email}
+                    </div>
+                </div>
+            </section>  : <h1 style={{'color': '#fff'}}>Go to authorization</h1>}
             
-        </section>
+        </>
+        
     )
 }
 
