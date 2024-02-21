@@ -4,9 +4,9 @@ import styles from './page.module.css';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
-import profile from './../../images/icons/profile.png';
 import plus from './../../images/icons/plus.svg';
 import Avatar from 'react-avatar-edit';
+import profile from './../../images/icons/profile.png';
 
 
 interface IUser {
@@ -36,12 +36,16 @@ const Profile: React.FC = () => {
         }).then(res => {
             console.log(res.data);
             setUserData(res.data);
+            let avatar: string = res.data[0].avatar;
+            if (avatar) {
+                localStorage.setItem('avatar', res.data[0].avatar);
+            }
         })
     }, [])
 
     const [avatarSrc, setAvatarSrc] = useState<any>(null);
-    const [preview, setPreview] = useState<null | any>(profile);
     const [editAvatar, setEditAvatar] = useState<boolean>(false);
+    const [preview, setPreview] = useState<null | any>(profile);
 
     const onCloseAvatarEdit = () => {
         setPreview(null)
@@ -58,8 +62,9 @@ const Profile: React.FC = () => {
         axios.post(createAvatarSrc, {
             username,
             preview
-        }).then(res => console.log(res.data));
+        }).then(res => {console.log(res.data)});
         setEditAvatar(false);
+        window.location.reload();
     }
 
     return (

@@ -4,7 +4,6 @@ import { useState } from "react";
 
 
 
-
 const ProviderWrapper = ({children}: {children: React.ReactNode}) => {
 
     const [profileMenuBar, setProfileMenuBar] = useState<boolean>(false);
@@ -13,7 +12,7 @@ const ProviderWrapper = ({children}: {children: React.ReactNode}) => {
 
 
     return (
-       <StoreContext.Provider value={{ token, setToken, profileMenuBar, setProfileMenuBar, profileMenuBarAnim, setProfileMenuBarAnim}}>
+       <StoreContext.Provider value={{  token, setToken, profileMenuBar, setProfileMenuBar, profileMenuBarAnim, setProfileMenuBarAnim}}>
             {children}
        </StoreContext.Provider>
     )

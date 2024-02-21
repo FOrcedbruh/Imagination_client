@@ -9,12 +9,11 @@ import profile from '../../images/icons/profile.png';
 import axios from 'axios';
 import { useContext } from 'react';
 import { StoreContext } from '@/Store/Store';
-
-
+import ProfileMenuBar from '../ProfileMenuBar/ProfileMenuBar';
 
 const Header: React.FC = () => {
 
-    const {  setProfileMenuBar, setProfileMenuBarAnim, token, setToken } = useContext(StoreContext);
+    const { profileMenuBar, setProfileMenuBar, setProfileMenuBarAnim, token, setToken } = useContext(StoreContext);
 
 
     const router = useRouter();
@@ -28,7 +27,7 @@ const Header: React.FC = () => {
     }
 
     const [userData, setUserData] = useState<UserType | null>(null);
-
+    const [avatar, setAvatar] = useState<string | null>('');
 
 
     const scrolHandler = () => {
@@ -72,6 +71,10 @@ const Header: React.FC = () => {
     }, [logoAnim]);
 
 
+    useEffect(() => {
+        setAvatar(localStorage.getItem('avatar'));
+    }, [avatar])
+
     
 
     const openMenuBarHandler =() => {
@@ -82,13 +85,14 @@ const Header: React.FC = () => {
 
     return(
         <header className={styles.header}>
+            {profileMenuBar && <ProfileMenuBar />}
             <div className={styles.logo}  onClick={() => router.push('/')}>
                 <Image src={logo} alt='' width={40} height={40}/>
             </div>
             <nav>
                <h1 className={logoAnim ? styles.animLogo : ''}>Imagination</h1>
             </nav>
-            {token ? <div onClick={openMenuBarHandler} className={styles.profile}><Image alt='' src={profile} width={30} height={30}/><Link href={'profile'}>{userData?.username}</Link></div> : <div className={styles.account}>
+            {token ? <div onClick={openMenuBarHandler} className={styles.profile}><Image alt='' src={avatar ? avatar : profile} width={30} height={30}/><Link href={'#'}>{userData?.username}</Link></div> : <div className={styles.account}>
                 <Link href={'/registration'}>Sign up</Link>
                 <Link href={'/login'} id={styles.loginLink}>Login</Link>
             </div>}
