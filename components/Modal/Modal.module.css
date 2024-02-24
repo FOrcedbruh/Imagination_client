@@ -1,0 +1,61 @@
+.window {
+    margin-top: -100px;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10;
+    transition: all 1s ease;
+}
+.window.blur {
+    backdrop-filter: blur(20px);
+}
+.modal {
+    width: 30%;
+    height: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    border-radius: 18px;
+}
+.modal h2 {
+    color: #fff;
+}
+.modal button {
+    min-width: 100px;
+    background: blueviolet;
+    padding: 10px 30px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all .3s ease;
+}
+.modal button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px blueviolet;
+}
+.modal button  p {
+    padding: 0;
+    margin: 0;
+}
+.modal input {
+    border: none;
+    outline: none;
+    background-color: rgb(16, 16, 16);
+    padding: 6px 15px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+.modal input:focus {
+    border: 2px solid blueviolet;
+}

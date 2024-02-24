@@ -67,3 +67,24 @@
 .advice h2 span {
     color: blueviolet;
 }
+.Btn {
+    position: absolute;
+    left: 60%;
+    top: 80%;
+    border: none;
+    outline: none;
+    background-color: blueviolet;
+    transition: opacity .4s ease;
+    padding: 10px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.Btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px blueviolet;
+}
