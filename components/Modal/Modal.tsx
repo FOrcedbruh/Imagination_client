@@ -36,9 +36,12 @@ const Modal: React.FC<ModalProps> = ({open, openHandler, ModalTitle, title, setT
             username,
             text,
             title: title
-        }).then(res => console.log(res.data))
-        openHandler(false);
-        setSuccess(true);
+        }).then(res => {
+            if (res.data.message === 'Note successfully created ') {
+                openHandler(false);
+                setSuccess(true);
+            }
+        })
     }
 
     const backBtnHandle = () => {

@@ -15,3 +15,21 @@ body {
     width: 100%;
     min-height: calc(100vh - 80px);
 }
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #363636;
+    width: 5px;
+    max-height: 100px;
+    border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #1b1b1b;
+}
+::selection {
+    background-color: rgba(138, 43, 226, 0.5);
+    opacity: 0.6;
+    color: #fff;
+}

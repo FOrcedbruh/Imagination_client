@@ -1,0 +1,56 @@
+.window {
+    padding: 40px;
+    position: fixed;
+    margin-top: -80px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 100px;
+    z-index: 1000;
+    transition: all .4s ease;
+}
+.window h1 {
+    color: #fff;
+    font-weight: 400;
+    font-size: 24px;
+}
+.window  span {
+    margin: 0;
+    padding: 0;
+    color: blueviolet;
+}
+.welcomeText {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 27ch;
+    border-right: 2px solid ;
+    animation: flashing-border 1.7s ease infinite, printed-text 3s steps(32);
+}
+@keyframes flashing-border {
+    0% {
+        border-color: blueviolet;
+    }
+    50% {
+        border-color: transparent
+    }
+    100% {
+        border-color: blueviolet;
+    }
+}
+@keyframes printed-text {
+    from {
+        width: 0;
+    }
+}
+
+
+.window h2 {
+    color: #fff;
+    width: 40%;
+    transition: opacity .5s ease;
+}
