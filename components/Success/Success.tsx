@@ -30,7 +30,7 @@ const Success: React.FC<SuccessProps> = ({title}) => {
         <section className={styles.window}>
             <Image className={doneAnim ? styles.anim : ''} src={success} alt='' style={{'opacity': done ? 1 : 0}}/>
             {text && <div><h1>{title} </h1><p className={styles.printed}>has been successfully saved into your Imagination Space</p></div>}
-            <button style={{'opacity': btn ? 1 : 0}} className={styles.Btn} onClick={() => router.push('/')}>Go into Space</button>
+            <button style={{'opacity': btn ? 1 : 0}} className={styles.Btn} onClick={() => router.push('/space')}>Go into Space</button>
         </section>
     )
 }

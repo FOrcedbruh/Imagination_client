@@ -7,7 +7,7 @@ import Image from 'next/image';
 import plus from './../../images/icons/plus.svg';
 import Avatar from 'react-avatar-edit';
 import profile from './../../images/icons/profile.png';
-
+import Link from 'next/link';
 
 interface IUser {
     username: string,
@@ -82,7 +82,11 @@ const Profile: React.FC = () => {
                     <div className={styles.email}>
                         {userData[0]?.email}
                     </div>
+                    <div className={styles.spaceBackground}>
+                        <Link href={'/space'}>SPACE</Link>
+                    </div>
                 </div>
+                
             </section>  : <h1 style={{'color': '#fff'}}>Go to authorization</h1>}
             
         </>
