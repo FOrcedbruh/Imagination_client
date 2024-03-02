@@ -5,6 +5,7 @@
     justify-content: start;
     align-items: center;
     overflow: scroll;
+    user-select: none;
 }
 
 .space {
@@ -14,32 +15,16 @@
     z-index: -1;
     height: 120%;
     transition: all 2s ease;
-    animation: space 10s ease infinite;
+    animation: space 24s ease-in-out infinite;
 }
 @keyframes space {
     0% {
         height: 100%;
         width: 100%;
     }
-    10% {
-        height: 105%;
-        width: 102%;
-    }
-    20% {
-        height: 115%;
-        width: 105%;
-    }
-    40% {
-        height: 124%;
-        width: 100%;
-    }
-    55% {
-        height: 112%;
-        width: 102%;
-    }
-    70% {
-        height: 108%;
-        width: 101%;
+    50% {
+        height: 110%;
+        width: 110%;
     }
     100% {
         height: 100%;
@@ -48,15 +33,13 @@
 }
 
 .imaginations {
-    margin-top: 200px;
     padding: 50px 0;
     height: fit-content;
     width: 50%;
-    height: 60%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     gap: 30px;
-    justify-content: center;
     align-items: center;
 }
 
@@ -69,13 +52,12 @@
     backdrop-filter: blur(20px);
     border-radius: 16px;
     padding: 10px 30px;
-    transition: all .2s ease-in-out;
+    transition: all .3s ease-in-out;
     cursor: pointer;
 }
 .Imagination:hover {
     backdrop-filter: blur(30px);
-    width: 500px;
-    transform: skew(50deg);
+    transform: skew(-30deg);
 }
 .Imagination div {
     display: flex;
@@ -101,7 +83,69 @@
     background-color: transparent;
     width: 400px;
     height: 600px;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all .4s ease;
+}
+.editing.editingShow {
+    opacity: 1;
+    transform: translateX(0);
 }
 .editing h1 {
     color: #fff;
+}
+.editing button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    width: 160px;
+    height: 30px;
+    padding: 5px 20px;
+    border-radius: 12px;
+    border: 1px solid blueviolet;
+    outline: none;
+    background: transparent;
+    color: blueviolet;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all .4s ease;
+    cursor: pointer;
+}
+.editing button:hover {
+    background-color: blueviolet;
+    gap: 40px;
+    color: #fff;
+}
+.close {
+    cursor: pointer;
+    align-self: flex-end;
+    transform: rotate(45deg);
+}
+
+.goToCreate {
+    position: absolute;
+    align-self: end;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 5%;
+    margin-left: 80%;
+    border-radius: 12px;
+}
+.goToCreate a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: all .3s ease;
+}
+.goToCreate a:hover {
+    gap: 40px;
 }

@@ -46,7 +46,10 @@ const RegPage: React.FC = () => {
         setTimeout(() => setResponse(''), 4000)
     }
 
-    const onSubmit = (data: any) => {
+    type sendData = { username: string, password: string, email: string}
+
+
+    const onSubmit = (data: sendData) => {
         const username: string = data.username;
         const password: string = data.password;
         const email: string = data.email;

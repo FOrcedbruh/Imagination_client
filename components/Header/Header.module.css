@@ -8,6 +8,8 @@
     backdrop-filter: blur(20px);
     position: fixed;
     color: #fff;
+    user-select: none;
+    z-index: 10;
 }
 .header nav h1 {
     letter-spacing: 0.1em;

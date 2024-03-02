@@ -51,11 +51,11 @@ const LoginPage: React.FC = () => {
 
     const router = useRouter();
 
+    type sendData = { username: string, password: string }
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: sendData) => {
         const username: string = data.username;
         const password: string = data.password;
-
 
         axios.post(src, {
             username,
