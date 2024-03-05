@@ -2,14 +2,17 @@
 import styles from './Success.module.css';
 import Image from 'next/image';
 import success from './../../images/icons/Success.svg';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation';
+import { StoreContext } from '@/Store/Store';
 
 interface SuccessProps {
     title?: string
 }
 
 const Success: React.FC<SuccessProps> = ({title}) => {
+
+    const { setSuccess } = useContext(StoreContext);
 
     const router = useRouter();
 
@@ -24,13 +27,18 @@ const Success: React.FC<SuccessProps> = ({title}) => {
         setTimeout(() => setDoneAnim(true), 2000);
         setTimeout(() => setText(true), 3000);
         setTimeout(() => setBtn(true), 6000);
-    }, [done])
+    }, [done]);
+
+    const goSpaceBtnHandler = () => {
+        setSuccess(false);
+        router.push('/space');
+    }
 
     return (
         <section className={styles.window}>
             <Image className={doneAnim ? styles.anim : ''} src={success} alt='' style={{'opacity': done ? 1 : 0}}/>
             {text && <div><h1>{title} </h1><p className={styles.printed}>has been successfully saved into your Imagination Space</p></div>}
-            <button style={{'opacity': btn ? 1 : 0}} className={styles.Btn} onClick={() => router.push('/space')}>Go into Space</button>
+            <button style={{'opacity': btn ? 1 : 0}} className={styles.Btn} onClick={goSpaceBtnHandler}>Go into Space</button>
         </section>
     )
 }

@@ -9,7 +9,7 @@ const Layout = ({children} : {children : React.ReactNode}) => {
     return (
         <section className={styles.window}>
             <header>
-
+                
             </header>
             <Image src={spaceImg} alt="" className={styles.space}/>
             {children}

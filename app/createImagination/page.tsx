@@ -51,7 +51,6 @@ const NotePage: React.FC = () => {
                 </div>
                 <button style={{'opacity': text ? 1 : 0}} className={styles.Btn} onClick={() => setCreateNote(true)}>Record</button>
             </div>
-            
         </section>
     )
 }

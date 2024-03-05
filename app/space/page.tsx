@@ -10,9 +10,11 @@ import editImg from './../../images/icons/edit.svg';
 import close from './../../images/icons/plus.svg';
 import Link from 'next/link';
 import arrow from './../../images/icons/arrow.svg';
+import { useRouter } from 'next/navigation';
 
 const Space: React.FC = () => {
 
+    const router = useRouter();
 
     const [imaginations, setImaginations] = useState<IImagination[]>([]);
     const [editing, setEditing] = useState<boolean>(false);
@@ -82,7 +84,7 @@ const Space: React.FC = () => {
                 <div onClick={closeEditingWindow} className={styles.close}><Image src={close} alt='' width={24} height={24}/></div>
                 <h1>{editingImagination?.title}</h1>
                 <button onClick={() => deleteHandler(editingImagination?._id)}>Delete <Image src={deleteImg} priority alt='' width={20} height={20}/></button>
-                <button>Edit <Image src={editImg} priority alt='' width={20} height={20}/></button>
+                <button onClick={() => router.push(`/space/${editingImagination?.title.replace(/ /g, "_")}`)}>Edit <Image src={editImg} priority alt='' width={20} height={20}/></button>
             </div>}
             <div className={styles.goToCreate}>
                 <Link href={'/createImagination'}>Create Imagination  <Image src={arrow} alt='' width={20} height={20}/></Link>
