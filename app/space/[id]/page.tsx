@@ -1,6 +1,6 @@
 'use client'
 import axios from "axios";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import styles from './page.module.css';
 import IImagination from "@/types/ImaginationType";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import Message from "@/components/Message/Message";
 
 
 
-const ImaginationPage  = ({params} : {params : { title : string}}) => {
+const ImaginationPage  = ({params} : {params : { id : number}}) => {
 
 
     const [imaginations, setImaginations] = useState<IImagination[]>([]);
@@ -40,18 +40,22 @@ const ImaginationPage  = ({params} : {params : { title : string}}) => {
     }
 
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const src: string = 'http://localhost:8080/auth/getNotes';
         const username: string | null = localStorage.getItem('username');
         axios.post(src, {
             username
         }).then(res => {
             setImaginations(res.data);
-            setTitle(res.data[0].title);
-            setText(res.data[0].text);
-            set_id(res.data[0]._id);
+            const currentImagination = imaginations[params.id];
+            setText(currentImagination.text);
+            setTitle(currentImagination.title);
         })
     }, []);
+    
+    
+
+
 
     return (
         <section className={styles.page}>

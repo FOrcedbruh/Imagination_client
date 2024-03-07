@@ -15,21 +15,34 @@ const HomePage: React.FC = () => {
 
     const [welcome, setWelcome] = useState<boolean>(false);
     const [blur, setBlur] = useState<boolean>(false);
+    const [text, setText] = useState<boolean>(false);
+
 
     const renderWelcome = () => {
         if (!token) {
             setWelcome(true);
             setTimeout(() => setBlur(true), 700)
+        } else if (token) {
+            setText(true);
         }
     }
+
+    
 
 
 
     return (
         <section className={styles.window}>
             {welcome && <Welcome blur={blur}/>}
-            <div className={styles.getStarted} onClick={renderWelcome}>
-                <Link  href={`${token ? '/createImagination' : '/'}`}><p>Get started</p> <Image src={arrowImg} alt='' width={24} height={24}/></Link>
+            <div className={styles.topSector}>
+                <div className={styles.getStarted} onClick={renderWelcome}>
+                    <p>Get started</p> <Image src={arrowImg} alt='' width={24} height={24}/>
+                </div>
+                <div className={`${styles.mainText} ${text ? styles.showText : null}`}>
+                <h5>
+                    Familiarize yourself with the templates of possible options for recording imagination or immediately <Link href={'/createImagination'}>start</Link> putting your thoughts on the canvas
+                </h5>
+            </div>
             </div>
         </section>
     )

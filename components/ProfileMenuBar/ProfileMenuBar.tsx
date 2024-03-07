@@ -27,6 +27,7 @@ const ProfileMenuBar: React.FC = () => {
             <ul>
                 <li><Link href={'/profile'}>Profile</Link></li>
                 <li><Link href={'/settings'}>Settings</Link></li>
+                <li><Link href={'/space'}>Space</Link></li>
                 <li><Link onClick={logoutHanlder} href={'/'}>Log out</Link></li>
             </ul>
         </section>
