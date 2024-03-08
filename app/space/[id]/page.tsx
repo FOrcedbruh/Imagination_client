@@ -1,6 +1,6 @@
 'use client'
 import axios from "axios";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from './page.module.css';
 import IImagination from "@/types/ImaginationType";
 import Image from "next/image";
@@ -9,10 +9,12 @@ import Message from "@/components/Message/Message";
 
 
 
-const ImaginationPage  = ({params} : {params : { id : number}}) => {
+const ImaginationPage  = ({params} : {params : { id : string}}) => {
 
+    
 
-    const [imaginations, setImaginations] = useState<IImagination[]>([]);
+    const numberId: number = Number(params.id);
+
     const [text, setText] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [_id, set_id] = useState<string>('');
@@ -46,10 +48,9 @@ const ImaginationPage  = ({params} : {params : { id : number}}) => {
         axios.post(src, {
             username
         }).then(res => {
-            setImaginations(res.data);
-            const currentImagination = imaginations[params.id];
-            setText(currentImagination.text);
-            setTitle(currentImagination.title);
+            setText(res.data[numberId].text);
+            setTitle(res.data[numberId].title);
+            set_id(res.data[numberId]._id);
         })
     }, []);
     
@@ -66,7 +67,7 @@ const ImaginationPage  = ({params} : {params : { id : number}}) => {
             <div className={styles.text}>
                 <textarea  value={text} onChange={e => textHandler(e)}/>
             </div>
-            <button onClick={editHandler} className={styles.editBtn}>Edit <Image src={editImg} alt="" width={20} height={20}/></button>
+            <button onClick={editHandler} className={styles.editBtn}>Edit <Image priority src={editImg} alt="" width={20} height={20}/></button>
         </section>
     )
 }

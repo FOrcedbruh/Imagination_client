@@ -46,12 +46,13 @@ const Space: React.FC = () => {
 
 
 
-    const [editingImagination, setEditingImagination] = useState<IImagination>();
+    const [clickImagination, setClickImagination] = useState<IImagination>();
+    const [id, setId] = useState<number>(0);
 
     const showEditingWindow = (index: number) => {
         setEditing(true);
-        setEditingImagination(imaginations[index]);
-
+        setClickImagination(imaginations[index]);
+        setId(index);
         setTimeout(() => setEditingAnim(true), 50);
     }
     const closeEditingWindow = () => {
@@ -88,10 +89,10 @@ const Space: React.FC = () => {
                 })}
             </div>
             {editing && <div className={`${styles.editing} ${editingAnim ? styles.editingShow : null}`}>
-                <div onClick={closeEditingWindow} className={styles.close}><Image src={close} alt='' width={24} height={24}/></div>
-                <h1>{editingImagination?.title}</h1>
-                <button onClick={() => deleteHandler(editingImagination?._id)}>Delete <Image src={deleteImg} priority alt='' width={20} height={20}/></button>
-                <button onClick={() => router.push(`/space/${1}`)}>Edit <Image src={editImg} priority alt='' width={20} height={20}/></button>
+                <div onClick={closeEditingWindow} className={styles.close}><Image priority src={close} alt='' width={24} height={24}/></div>
+                <h1>{clickImagination?.title}</h1>
+                <button onClick={() => deleteHandler(clickImagination?._id)}>Delete <Image src={deleteImg} priority alt='' width={20} height={20}/></button>
+                <button onClick={() => router.push(`/space/${id}`)}>Edit <Image src={editImg} priority alt='' width={20} height={20}/></button>
             </div>}
             <div className={styles.goToCreate}>
                 <Link href={'/createImagination'}>Create Imagination  <Image src={arrow} alt='' width={20} height={20}/></Link>
