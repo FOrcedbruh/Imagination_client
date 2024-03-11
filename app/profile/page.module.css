@@ -77,3 +77,13 @@
     background-color: rgb(16, 16, 16);
     border-radius: 12px;
 }
+
+.lastNote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 400px;
+}
+.lastNote h1 {
+    color: #fff;
+}
