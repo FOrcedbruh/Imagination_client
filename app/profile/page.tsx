@@ -8,7 +8,6 @@ import plus from './../../images/icons/plus.svg';
 import Avatar from 'react-avatar-edit';
 import profile from './../../images/icons/profile.png';
 import Link from 'next/link';
-import IImagination from '@/types/ImaginationType';
 
 
 
@@ -27,7 +26,6 @@ const Profile: React.FC = () => {
     const src: string = 'http://localhost:8080/getUser';
 
     const [userData, setUserData] = useState<IUser[]>([]);
-    const [imagiantions, setImaginations] = useState<IImagination[]>([]);
 
     
 
@@ -45,15 +43,6 @@ const Profile: React.FC = () => {
         })
     }, [])
 
-    useEffect(() => {
-        const src: string = 'http://localhost:8080/auth/getNotes';
-        const username: string = userData[0]?.username
-        axios.post(src, {
-            username
-        }).then(res => {
-            setImaginations(res.data);
-        })
-    }, [])
 
     const [avatarSrc, setAvatarSrc] = useState<any>(null);
     const [editAvatar, setEditAvatar] = useState<boolean>(false);
@@ -79,7 +68,6 @@ const Profile: React.FC = () => {
         window.location.reload();
     }
 
-    const imaginationsLengh: number = imagiantions.length;
 
     return (
         <>  
@@ -99,13 +87,7 @@ const Profile: React.FC = () => {
                     <div className={styles.spaceBackground}>
                         <Link href={'/space'}>SPACE</Link>
                     </div>
-                    <div className={styles.lastNote}>
-                        <h1>Your last <b>Imagiantion</b></h1>
-                        <Link href={`/space/`}>{imagiantions[imaginationsLengh]?.title}</Link>
-                    </div>
                 </div>
-                
-                
             </section>  : <h1 style={{'color': '#fff'}}>Go to authorization</h1>}
             
         </>

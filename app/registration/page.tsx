@@ -10,13 +10,13 @@ import axios from 'axios';
 import Message from '@/components/Message/Message';
 import { useContext } from 'react';
 import { StoreContext } from '@/Store/Store';
-
+import { useRouter } from 'next/navigation';
 
 const RegPage: React.FC = () => {
 
     const { token } = useContext(StoreContext);
 
-
+    const router = useRouter();
 
     const [response, setResponse] = useState<string>('');
 
@@ -39,7 +39,7 @@ const RegPage: React.FC = () => {
         handleSubmit
     } = useForm<FormState>({mode: 'onBlur'});
 
-    const src: string = 'http://localhost:8080/auth/registration'
+   
 
 
     const closeMessage = () => {
@@ -50,6 +50,7 @@ const RegPage: React.FC = () => {
 
 
     const onSubmit = (data: sendData) => {
+        const src: string = 'http://localhost:8080/auth/registration'
         const username: string = data.username;
         const password: string = data.password;
         const email: string = data.email;
@@ -60,7 +61,6 @@ const RegPage: React.FC = () => {
             email,
             password
         }).then(res => {
-            console.log(res.data.message);
             setResponse(res.data.message);
         })
 
@@ -101,7 +101,7 @@ const RegPage: React.FC = () => {
                     </div>
                     <div className={styles.area}>
                         <label htmlFor="password">Password</label>
-                        <section>
+                        <section style={{'display': 'flex', 'gap': 20}}>
                             <input type={`${eye ? 'text' : 'password'}`} placeholder='qwerty...' {...register('password', {
                             required: 'Enter your password',
                             minLength: {

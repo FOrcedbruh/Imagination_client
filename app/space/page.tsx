@@ -77,7 +77,7 @@ const Space: React.FC = () => {
         <section className={styles.window}>
             <Image priority src={space} alt='' className={styles.space} style={{'filter': grayscale ? 'grayscale(0)' : 'grayscale(1)'}}/>
             <div className={styles.imaginations}>
-                {imaginations.map((note, index) => {
+                {imaginations.length > 0 ? imaginations.map((note, index) => {
                     return (
                         <article className={styles.Imagination} key={index} onDoubleClick={() => showEditingWindow(index)}>
                             <div>
@@ -86,7 +86,13 @@ const Space: React.FC = () => {
                             </div>
                         </article>
                     )
-                })}
+                }) : <article className={styles.Imagination}>
+                        <div>
+                            <h1>There are no records yet</h1>
+                            <h5><Link href={'/createImagination'}>Let's Imagine</Link></h5>
+                        </div>
+                    </article>
+                    }
             </div>
             {editing && <div className={`${styles.editing} ${editingAnim ? styles.editingShow : null}`}>
                 <div onClick={closeEditingWindow} className={styles.close}><Image priority src={close} alt='' width={24} height={24}/></div>

@@ -71,6 +71,10 @@
     padding: 0;
     margin: 0;
 }
+.Imagination div h5 a {
+    text-decoration: none;
+    color: blueviolet;
+}
 .editing {
     padding: 20px;
     gap: 20px;
