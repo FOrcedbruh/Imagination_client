@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation';
 import qrBotImg from './../../images/qrBot.svg';
 
 
-
 const Settings: React.FC = () => {
 
     const router = useRouter();
@@ -36,6 +35,8 @@ const Settings: React.FC = () => {
             setQrBlur(true);
         })
 
+        
+
         return (
             <div onClick={() => setQrBotState(false)} className={`${styles.qrBot} ${qrBlur ? styles.blur : null}`}>
                 <h1>Point the camera</h1>
@@ -46,7 +47,6 @@ const Settings: React.FC = () => {
             </div>
         )
     }
-
 
     return (
         <section className={styles.window}>

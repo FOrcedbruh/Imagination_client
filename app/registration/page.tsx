@@ -8,15 +8,9 @@ import non_viewImg from '../../images/icons/non_view.svg';
 import { useState } from 'react';
 import axios from 'axios';
 import Message from '@/components/Message/Message';
-import { useContext } from 'react';
-import { StoreContext } from '@/Store/Store';
-import { useRouter } from 'next/navigation';
 
 const RegPage: React.FC = () => {
 
-    const { token } = useContext(StoreContext);
-
-    const router = useRouter();
 
     const [response, setResponse] = useState<string>('');
 
@@ -72,7 +66,6 @@ const RegPage: React.FC = () => {
 
     return (
         <>
-            {token ? <h1 style={{'color': '#fff'}}>You are already authorize</h1> :
             <section className={styles.window}>
                 {response && <Message response={response}/>}
                 <h1>Registration</h1>
@@ -116,7 +109,7 @@ const RegPage: React.FC = () => {
                     <input style={{'cursor': !isValid ? 'not-allowed' : 'pointer'}} type="submit" value={'Sign up'} className={styles.regBtn} disabled={!isValid}/>
                 </form>
                 <p className={styles.logLink}>Alredy have an account?<Link href={'/login'}>Login</Link></p>
-            </section>}
+            </section>
         </>
         
     )

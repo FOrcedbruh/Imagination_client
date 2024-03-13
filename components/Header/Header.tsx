@@ -10,11 +10,13 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { StoreContext } from '@/Store/Store';
 import ProfileMenuBar from '../ProfileMenuBar/ProfileMenuBar';
+import { AuthController } from '@/Cookies/tokenManager/token';
 
 const Header: React.FC = () => {
 
-    const { profileMenuBar, setProfileMenuBar, setProfileMenuBarAnim, token, setToken } = useContext(StoreContext);
+    const { profileMenuBar, setProfileMenuBar, setProfileMenuBarAnim } = useContext(StoreContext);
 
+    const token: string = AuthController.getToken();
 
     const router = useRouter();
 
@@ -45,7 +47,6 @@ const Header: React.FC = () => {
 
 
     useEffect(() => {
-        setToken(localStorage.getItem('token'))
         if (token) {
             axios.post(src, {
                 token
@@ -86,9 +87,9 @@ const Header: React.FC = () => {
     return(
         <header className={styles.header}>
             {profileMenuBar && <ProfileMenuBar />}
-            <div className={styles.logo}  onClick={() => router.push('/')}>
+            <section className={styles.logo}  onClick={() => router.push('/')}>
                 <Image src={logo} alt='' width={40} height={40}/>
-            </div>
+            </section>
             <nav>
                <h1 className={logoAnim ? styles.animLogo : ''}>Imagination</h1>
             </nav>

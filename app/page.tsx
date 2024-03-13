@@ -3,15 +3,14 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import arrowImg from '../images/icons/arrow.svg';
 import Image from 'next/image';
-import { useContext, useState } from 'react';
-import { StoreContext } from '@/Store/Store';
 import Welcome from '@/components/Welcome/Welcome';
-
+import { AuthController } from '@/Cookies/tokenManager/token';
+import { useState } from 'react';
 
 const HomePage: React.FC = () => {
 
 
-    const { token } = useContext(StoreContext);
+    const token: string = AuthController.getToken();
 
     const [welcome, setWelcome] = useState<boolean>(false);
     const [blur, setBlur] = useState<boolean>(false);

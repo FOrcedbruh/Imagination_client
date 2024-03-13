@@ -9,15 +9,12 @@ import { useState } from 'react';
 import axios from 'axios';
 import Message from '@/components/Message/Message';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
-import { StoreContext } from '@/Store/Store';
-
+import { AuthController } from '@/Cookies/tokenManager/token';
 
 
 const LoginPage: React.FC = () => {
 
-    
-    const { token }  =  useContext(StoreContext)
+
 
 
 
@@ -63,6 +60,7 @@ const LoginPage: React.FC = () => {
         }).then(res => {
             setResponse(res.data.message);
             const token = res.data.token;
+            AuthController.setToken(token);
             localStorage.setItem('token', token);
         })
 
@@ -71,11 +69,9 @@ const LoginPage: React.FC = () => {
         setTimeout(() => router.push('/'), 2000);
     }
 
-    
 
     return (
         <>
-            {token ? <h1 style={{'color': '#fff'}}>You are already authorize</h1> : 
             <section className={styles.window}>
                 {response && <Message response={response}/>}
                 <h1>Login</h1>
@@ -93,7 +89,7 @@ const LoginPage: React.FC = () => {
                     </div>
                     <div className={styles.area}>
                         <label htmlFor="password">Password</label>
-                        <section>
+                        <section style={{'display': 'flex', 'gap': 20}}>
                             <input type={`${eye ? 'text' : 'password'}`} placeholder='qwerty...' {...register('password', {
                             required: 'Enter your password',
                             minLength: {
@@ -108,7 +104,7 @@ const LoginPage: React.FC = () => {
                     <input style={{'cursor': !isValid ? 'not-allowed' : 'pointer'}} type="submit" value={'Sign in'} className={styles.regBtn} disabled={!isValid}/>
                 </form>
                 <p className={styles.logLink}>Dont have an account?<Link href={'/registration'}>Registration</Link></p>
-            </section>}
+            </section>
         </>
         
     )

@@ -1,8 +1,7 @@
 'use client'
-import { StoreContext } from '@/Store/Store';
 import styles from './page.module.css';
 import axios from 'axios';
-import { useState, useEffect, useContext, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import plus from './../../images/icons/plus.svg';
 import Avatar from 'react-avatar-edit';
@@ -20,7 +19,6 @@ interface IUser {
 
 const Profile: React.FC = () => {
 
-    const { token } = useContext(StoreContext);
 
 
     const src: string = 'http://localhost:8080/getUser';
@@ -34,7 +32,6 @@ const Profile: React.FC = () => {
         axios.post(src, {
             username
         }).then(res => {
-            console.log(res.data);
             setUserData(res.data);
             let avatar: string = res.data[0].avatar;
             if (avatar) {
@@ -71,7 +68,7 @@ const Profile: React.FC = () => {
 
     return (
         <>  
-            {token ? <section className={styles.window}>
+            <section className={styles.window}>
                 {editAvatar && <div className={styles.avatarEdit}><Avatar  onCrop={onCropAvatar} onClose={onCloseAvatarEdit} src={avatarSrc} width={300} height={300}/><p onClick={AvatarDoneHandler}>done</p></div>}
                 <div className={styles.userInfo}>
                     <article>
@@ -88,7 +85,7 @@ const Profile: React.FC = () => {
                         <Link href={'/space'}>SPACE</Link>
                     </div>
                 </div>
-            </section>  : <h1 style={{'color': '#fff'}}>Go to authorization</h1>}
+            </section>
             
         </>
         
