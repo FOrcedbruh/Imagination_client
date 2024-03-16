@@ -10,13 +10,15 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { StoreContext } from '@/Store/Store';
 import ProfileMenuBar from '../ProfileMenuBar/ProfileMenuBar';
-import { AuthController } from '@/Cookies/tokenManager/token';
+import { getCookie, setCookie } from 'cookies-next';
+
+
 
 const Header: React.FC = () => {
 
     const { profileMenuBar, setProfileMenuBar, setProfileMenuBarAnim } = useContext(StoreContext);
 
-    const token: string = AuthController.getToken();
+    const token: string | undefined = getCookie('token');
 
     const router = useRouter();
 
@@ -29,8 +31,8 @@ const Header: React.FC = () => {
     }
 
     const [userData, setUserData] = useState<UserType | null>(null);
-    const [avatar, setAvatar] = useState<string | null>('');
-
+    const [avatar, setAvatar] = useState<any>('');
+    const [tokenCheck, setTokenCheck] = useState<boolean>(false);
 
     const scrolHandler = () => {
         const scroll = window.scrollY;
@@ -52,10 +54,12 @@ const Header: React.FC = () => {
                 token
             }).then(res => {
                 setUserData(res.data.userData);
-                localStorage.setItem('username', res.data.userData.username);
+                setCookie('username', res.data.userData.username);
             });
+            setTokenCheck(true);
+        } else if (!token) {
+            setTokenCheck(false);
         }
-        
     }, [token]);
 
     
@@ -73,7 +77,7 @@ const Header: React.FC = () => {
 
 
     useEffect(() => {
-        setAvatar(localStorage.getItem('avatar'));
+        setAvatar(getCookie('avatar'));
     }, [avatar])
 
     
@@ -93,10 +97,11 @@ const Header: React.FC = () => {
             <nav>
                <h1 className={logoAnim ? styles.animLogo : ''}>Imagination</h1>
             </nav>
-            {token ? <div onClick={openMenuBarHandler} className={styles.profile}><Image alt='' src={avatar ? avatar : profile} width={30} height={30}/><Link href={'#'}>{userData?.username}</Link></div> : <div className={styles.account}>
+            
+            {tokenCheck ? <section onClick={openMenuBarHandler} className={styles.profile}><Image src={profile} alt='' width={30} height={30}/><Link href={'#'}>{userData?.username}</Link></section> : <section className={styles.account}>
                 <Link href={'/registration'}>Sign up</Link>
                 <Link href={'/login'} id={styles.loginLink}>Login</Link>
-            </div>}
+            </section>}
         </header>
     )
 }

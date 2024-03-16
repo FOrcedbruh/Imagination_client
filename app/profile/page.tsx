@@ -7,7 +7,7 @@ import plus from './../../images/icons/plus.svg';
 import Avatar from 'react-avatar-edit';
 import profile from './../../images/icons/profile.png';
 import Link from 'next/link';
-
+import { setCookie, getCookie } from 'cookies-next';
 
 
 interface IUser {
@@ -28,17 +28,15 @@ const Profile: React.FC = () => {
     
 
     useEffect(() => {
-        const username: string | null = localStorage.getItem('username');
+        const username: string | undefined = getCookie('username');
         axios.post(src, {
             username
         }).then(res => {
             setUserData(res.data);
-            let avatar: string = res.data[0].avatar;
-            if (avatar) {
-                localStorage.setItem('avatar', res.data[0].avatar);
-            }
         })
     }, [])
+
+    
 
 
     const [avatarSrc, setAvatarSrc] = useState<any>(null);
@@ -62,7 +60,6 @@ const Profile: React.FC = () => {
             preview
         }).then(res => {console.log(res.data)});
         setEditAvatar(false);
-        window.location.reload();
     }
 
 

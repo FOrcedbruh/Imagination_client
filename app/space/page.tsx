@@ -11,6 +11,7 @@ import close from './../../images/icons/plus.svg';
 import Link from 'next/link';
 import arrow from './../../images/icons/arrow.svg';
 import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 
 
 
@@ -36,13 +37,13 @@ const Space: React.FC = () => {
 
     useLayoutEffect(() => {
         const src: string = 'http://localhost:8080/auth/getNotes';
-        const username: string | null = localStorage.getItem('username');
+        const username: string | undefined = getCookie('username');
         axios.post(src, {
             username
         }).then(res => {
             setImaginations(res.data);
         })
-    }, []);
+    }, [imaginations]);
 
 
 
@@ -70,8 +71,7 @@ const Space: React.FC = () => {
         }).then(res => {
             console.log(res.data);
         });
-
-        window.location.reload();
+        closeEditingWindow();
     }
     return (
         <section className={styles.window}>

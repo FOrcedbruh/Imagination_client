@@ -6,6 +6,7 @@ import IImagination from "@/types/ImaginationType";
 import Image from "next/image";
 import editImg from './../../../images/icons/edit.svg';
 import Message from "@/components/Message/Message";
+import { getCookie } from "cookies-next";
 
 
 
@@ -44,7 +45,7 @@ const ImaginationPage  = ({params} : {params : { id : string}}) => {
 
     useEffect(() => {
         const src: string = 'http://localhost:8080/auth/getNotes';
-        const username: string | null = localStorage.getItem('username');
+        const username: string | undefined = getCookie('username');
         axios.post(src, {
             username
         }).then(res => {

@@ -9,8 +9,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Message from '@/components/Message/Message';
 import { useRouter } from 'next/navigation';
-import { AuthController } from '@/Cookies/tokenManager/token';
-
+import { setCookie } from 'cookies-next';
 
 const LoginPage: React.FC = () => {
 
@@ -60,8 +59,7 @@ const LoginPage: React.FC = () => {
         }).then(res => {
             setResponse(res.data.message);
             const token = res.data.token;
-            AuthController.setToken(token);
-            localStorage.setItem('token', token);
+            setCookie('token', token, { secure: true});
         })
 
         closeMessage();

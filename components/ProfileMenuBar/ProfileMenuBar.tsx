@@ -3,8 +3,7 @@ import { StoreContext } from '@/Store/Store';
 import styles from './ProfileMenuBar.module.css';
 import { useContext } from 'react';
 import Link from 'next/link';
-import { AuthController } from '@/Cookies/tokenManager/token';
-
+import { deleteCookie } from 'cookies-next';
 
 
 const ProfileMenuBar: React.FC = () => {
@@ -19,7 +18,8 @@ const ProfileMenuBar: React.FC = () => {
     }
 
     const logoutHanlder = () => {
-        AuthController.logout();
+        deleteCookie('token');
+        deleteCookie('username');
     }
 
     return (

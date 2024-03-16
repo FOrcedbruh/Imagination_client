@@ -4,13 +4,13 @@ import Link from 'next/link';
 import arrowImg from '../images/icons/arrow.svg';
 import Image from 'next/image';
 import Welcome from '@/components/Welcome/Welcome';
-import { AuthController } from '@/Cookies/tokenManager/token';
 import { useState } from 'react';
+import { getCookie } from 'cookies-next';
 
 const HomePage: React.FC = () => {
 
 
-    const token: string = AuthController.getToken();
+    const token = getCookie('token');
 
     const [welcome, setWelcome] = useState<boolean>(false);
     const [blur, setBlur] = useState<boolean>(false);
@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
 
 
     return (
-        <section className={styles.window}>
+        <section  className={styles.window}>
             {welcome && <Welcome blur={blur}/>}
             <div className={styles.topSector}>
                 <div className={styles.getStarted} onClick={renderWelcome}>

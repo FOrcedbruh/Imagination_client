@@ -4,6 +4,7 @@ import axios from 'axios';
 import BackBtn from '../BackBtn/BackBtn';
 import { useContext } from 'react';
 import { StoreContext } from '@/Store/Store';
+import { getCookie } from 'cookies-next';
 
 interface ModalProps {
     openHandler: Dispatch<SetStateAction<boolean>>
@@ -31,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({open, openHandler, ModalTitle, title, setT
     const src: string = 'http://localhost:8080/auth/createNote'
 
     const createNote = () => {
-        const username: string | null = localStorage.getItem('username');
+        const username: string | undefined = getCookie('username');
         axios.post(src, {
             username,
             text,

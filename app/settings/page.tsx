@@ -8,7 +8,7 @@ import qr from './../../images/icons/qr.svg';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import qrBotImg from './../../images/qrBot.svg';
-
+import { deleteCookie } from 'cookies-next';
 
 const Settings: React.FC = () => {
 
@@ -20,9 +20,9 @@ const Settings: React.FC = () => {
     
 
     const logOutHandler = () => {
-        localStorage.clear();
+        deleteCookie('token');
+        deleteCookie('username');
         setTimeout(() => router.push('/'), 1000);
-        setTimeout(() => window.location.reload(), 2000);
     }
 
 

@@ -5,7 +5,6 @@ import Header from "@/components/Header/Header";
 import ProviderWrapper from "@/Store/provider";
 
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 
