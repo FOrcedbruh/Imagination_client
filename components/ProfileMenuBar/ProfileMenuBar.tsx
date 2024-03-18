@@ -1,21 +1,24 @@
 'use client'
 import { StoreContext } from '@/Store/Store';
 import styles from './ProfileMenuBar.module.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { deleteCookie } from 'cookies-next';
 
 
 const ProfileMenuBar: React.FC = () => {
 
-    const { profileMenuBarAnim, setProfileMenuBarAnim, setProfileMenuBar} = useContext(StoreContext);
-
+    const { setProfileMenuBar} = useContext(StoreContext);
+    const [opacity, setOpacity] = useState<boolean>(false);
 
     const closeMenuBarHandler =() => {
-        setProfileMenuBarAnim(false);
-
-        setTimeout(() => setProfileMenuBar(false), 200);
+        setOpacity(false);
+        setTimeout(() => setProfileMenuBar(false), 300);
     }
+
+    useEffect(() => {
+        setOpacity(true);
+    }, [])
 
     const logoutHanlder = () => {
         deleteCookie('token');
@@ -23,7 +26,7 @@ const ProfileMenuBar: React.FC = () => {
     }
 
     return (
-        <section onClick={closeMenuBarHandler} className={`${styles.window} ${profileMenuBarAnim ? styles.blur : ''}`}>
+        <section onClick={closeMenuBarHandler} style={{'opacity': opacity ? 1 : 0}} className={styles.window}>
             <ul>
                 <li><Link href={'/profile'}>Profile</Link></li>
                 <li><Link href={'/settings'}>Settings</Link></li>

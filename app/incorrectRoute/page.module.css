@@ -1,0 +1,18 @@
+.window {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.window a {
+    color:#fff;
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+}
+.window a span {
+    color: blueviolet;
+    font-weight: 600;
+}

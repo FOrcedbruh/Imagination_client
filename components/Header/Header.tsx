@@ -16,7 +16,7 @@ import { getCookie, setCookie } from 'cookies-next';
 
 const Header: React.FC = () => {
 
-    const { profileMenuBar, setProfileMenuBar, setProfileMenuBarAnim } = useContext(StoreContext);
+    const { profileMenuBar, setProfileMenuBar } = useContext(StoreContext);
 
     const token: string | undefined = getCookie('token');
 
@@ -84,8 +84,6 @@ const Header: React.FC = () => {
 
     const openMenuBarHandler =() => {
         setProfileMenuBar(true);
-
-        setTimeout(() => setProfileMenuBarAnim(true), 200);
     }
 
     return(

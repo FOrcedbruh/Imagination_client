@@ -61,3 +61,16 @@
     text-decoration: underline;
     color: blueviolet;
 }
+
+
+.midSector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.midSector h2 {
+    color: #fff;
+}

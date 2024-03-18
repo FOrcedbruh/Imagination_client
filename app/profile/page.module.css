@@ -49,34 +49,7 @@
     font-weight: 600;
     cursor: pointer;
 }
-.spaceBackground {
-    margin-left: 100px;
-    margin-top: 100px;
-    background: url('./../../images/spaceText.jpg');
-    width: 200px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    border: 1px solid blueviolet;
-    transition: all .3s ease;
-}
-.spaceBackground:hover {
-    transform: skew(-40deg);
-}
-.spaceBackground a {
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    color: #fff;
-    mix-blend-mode: multiply;
-    padding: 10px 20px;
-    display: inline-block;
-    background-color: rgb(16, 16, 16);
-    border-radius: 12px;
-}
+
 
 .lastNote {
     display: flex;
@@ -86,4 +59,23 @@
 }
 .lastNote h1 {
     color: #fff;
+}
+
+.spaceBtn {
+    margin: 100px;
+    letter-spacing: 0.1rem;
+    width: 170px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 5px 40px;
+    border: 1px solid blueviolet;
+    cursor: pointer;
+    transition: all .4s ease;
+}
+.spaceBtn:hover {
+    background-color: blueviolet;
+    width: 200px;
 }
